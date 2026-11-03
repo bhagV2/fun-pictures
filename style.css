@@ -13,6 +13,7 @@ canvas {
   max-width: 600px;
 }
 
+#actions,
 #filters {
   display: flex;
   flex-wrap: wrap;
@@ -30,6 +31,12 @@ button {
   font-size: 16px;
 }
 
-button.active {
+button.active,
+#capture {
   background: #e91e63;
+}
+
+#capture {
+  font-size: 18px;
+  padding: 14px 22px;
 }

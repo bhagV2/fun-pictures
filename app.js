@@ -3,18 +3,26 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
 let currentFilter = 'none';
+let facingMode = 'user';
+let drawing = false;
 
 async function startCamera() {
+  if (video.srcObject) {
+    video.srcObject.getTracks().forEach(t => t.stop());
+  }
   try {
     const stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: 'user' },
+      video: { facingMode },
       audio: false
     });
     video.srcObject = stream;
     video.onloadedmetadata = () => {
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
-      draw();
+      if (!drawing) {
+        drawing = true;
+        draw();
+      }
     };
   } catch (err) {
     alert('Caméra inaccessible : ' + err.message);
@@ -60,5 +68,25 @@ document.querySelectorAll('#filters button').forEach(btn => {
     btn.classList.add('active');
   });
 });
+
+document.getElementById('capture').addEventListener('click', () => {
+  canvas.toBlob(blob => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'funpictures-' + Date.now() + '.png';
+    a.click();
+    URL.revokeObjectURL(url);
+  }, 'image/png');
+});
+
+document.getElementById('switch').addEventListener('click', () => {
+  facingMode = facingMode === 'user' ? 'environment' : 'user';
+  startCamera();
+});
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js');
+}
 
 startCamera();

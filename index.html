@@ -3,12 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e91e63">
   <title>FunPictures</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <video id="video" autoplay playsinline muted hidden></video>
   <canvas id="canvas"></canvas>
+
+  <div id="actions">
+    <button id="capture">📸 Prendre une photo</button>
+    <button id="switch">🔄 Changer de caméra</button>
+  </div>
 
   <div id="filters">
     <button data-filter="none" class="active">Normal</button>
