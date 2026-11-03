@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FunPictures</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <video id="video" autoplay playsinline muted hidden></video>
+  <canvas id="canvas"></canvas>
+
+  <div id="filters">
+    <button data-filter="none" class="active">Normal</button>
+    <button data-filter="gray">Gris</button>
+    <button data-filter="sepia">Sépia</button>
+    <button data-filter="invert">Inversé</button>
+    <button data-filter="red">Rouge</button>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
